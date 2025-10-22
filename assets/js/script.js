@@ -65,7 +65,33 @@ tabs.forEach((tab) => {
 })
 
 /*=============== SERVICES ACCORDION ===============*/
+const servicesButton = document.querySelectorAll('.services-button');
 
+servicesButton.forEach(button => {
+  const heightInfo = document.querySelector('.services-info');
+  heightInfo.style.height = heightInfo.scrollHeight + 'px';
+
+  button.addEventListener('click', () => {
+    const servicesCards = document.querySelectorAll('.services-card'),
+    currentCard = button.parentNode,
+    currentInfo = currentCard.querySelector('.services-info');
+    isCardOpen = currentCard.classList.contains('services-open');
+
+    // close all other other services info
+    servicesCards.forEach(card => {
+      card.classList.replace('services-open', 'services-close');
+
+      const info = card.querySelector('.services-info');
+      info.style.height = '0';
+    })
+
+    // open only if not already open
+    if(!isCardOpen){
+      currentCard.classList.replace('services-close', 'services-open');
+      currentInfo.style.height = currentInfo.scrollHeight + 'px';
+    }
+  })
+})
 
 /*=============== TESTIMONIALS OF DUPLICATE CARDS ===============*/
 
