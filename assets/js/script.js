@@ -151,9 +151,48 @@ const scrollActive = () => {
 window.addEventListener('scroll', scrollActive);
 
 /*=============== CUSTOM CURSOR ===============*/
+const cursor = document.querySelector('.cursor');
+let mouseX = 0, mouseY = 0;
+const cursorMove = () => {
+  cursor.style.left = `${mouseX}px`;
+  cursor.style.top = `${mouseY}px`;
+  cursor.style.transform = `translate(-50%, -50%)`;
 
+  // update the cursor animation
+  requestAnimationFrame(cursorMove);
+}
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+})
+
+cursorMove()
 
 /* Hide custom cursor on links */
-
+const a = document.querySelectorAll('a');
+a.forEach(item => {
+  item.addEventListener('mousemove', () => {
+    cursor.classList.add('hide-cursor');
+  })
+  item.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hide-cursor');
+  })
+})
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
+const sr = ScrollReveal({
+  origin: 'top',
+  distance: '60px',
+  duration: 2000,
+  delay: 300,
+})
+
+sr.reveal(`.home-image, .projects-container, .work-container, 
+           .testimonials-container, .contact-container`);
+sr.reveal(`.home-data`, {delay: 900, origin: 'button'});
+sr.reveal(`.home-info`, {delay: 1200, origin: 'button'});
+sr.reveal(`.home-social, .home-cv`, {delay: 1500});
+sr.reveal(`.about-data`, {origin: 'left'});
+sr.reveal(`.about-image`, {origin: 'right'});
+sr.reveal(`.services-card`, {interval: 100});
