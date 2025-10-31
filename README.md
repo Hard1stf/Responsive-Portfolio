@@ -32,7 +32,7 @@ This project is a **Responsive Portfolio Website** developed using **HTML**, **C
 ## 🖼️ Screenshots
 
 ### 🖥️ Desktop View
-![Desktop View Screenshot](./screenshots/desktop-view.png)
+![Desktop View Screenshot](/screenshot/preview.png)
 
 ### 📱 Mobile Views
 <p align="center">
