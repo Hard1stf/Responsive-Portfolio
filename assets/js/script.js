@@ -73,8 +73,8 @@ servicesButton.forEach(button => {
 
   button.addEventListener('click', () => {
     const servicesCards = document.querySelectorAll('.services-card'),
-    currentCard = button.parentNode,
-    currentInfo = currentCard.querySelector('.services-info');
+      currentCard = button.parentNode,
+      currentInfo = currentCard.querySelector('.services-info');
     isCardOpen = currentCard.classList.contains('services-open');
 
     // close all other other services info
@@ -86,7 +86,7 @@ servicesButton.forEach(button => {
     })
 
     // open only if not already open
-    if(!isCardOpen){
+    if (!isCardOpen) {
       currentCard.classList.replace('services-close', 'services-open');
       currentInfo.style.height = currentInfo.scrollHeight + 'px';
     }
@@ -101,14 +101,14 @@ tracks.forEach(track => {
   const cards = [...track.children] // spread to make a static copy
 
   // Duplicate cards only once
-  for(const card of cards){
+  for (const card of cards) {
     track.appendChild(card.cloneNode(true));
   };
 });
 
 /*=============== COPY EMAIL IN CONTACT ===============*/
 const copyBtn = document.getElementById('contact-btn'),
-copyEmail = document.getElementById('contact-email').textContent;
+  copyEmail = document.getElementById('contact-email').textContent;
 
 copyBtn.addEventListener('click', () => {
   // Use the clipboard API to copy text
@@ -124,10 +124,31 @@ copyBtn.addEventListener('click', () => {
 })
 
 /*=============== CURRENT YEAR OF THE FOOTER ===============*/
+const textYear = document.getElementById('footer-year'),
+  currentYear = new Date().getFullYear();
 
+// Each year it is update to the current year.
+textYear.textContent = currentYear;
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
+const sections = document.querySelectorAll('section[id]');
 
+const scrollActive = () => {
+  // we get the position by scrolling down
+  const scrollY = window.scrollY;
+
+  sections.forEach(section => {
+    const id = section.id, // id of each section
+          top = section.offsetTop - 50, // Distance from the top edge
+          height = section.offsetHeight, // element height 
+          link = document.querySelector(`.nav-menu a[href*="${ id }"]`) //id nav link 
+    if(!link) return
+
+    link.classList.toggle('active-link', scrollY > top && scrollY <= top + height)
+  })
+}
+
+window.addEventListener('scroll', scrollActive);
 
 /*=============== CUSTOM CURSOR ===============*/
 
